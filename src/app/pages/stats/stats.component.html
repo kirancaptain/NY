@@ -1,0 +1,44 @@
+<div class="vid-container">
+  <mat-toolbar color="primary" *ngIf="!isVideoUploaded">
+    <mat-toolbar-row></mat-toolbar-row>
+  </mat-toolbar>
+  <mat-card *ngIf="!isVideoUploaded" class="main-card">
+    <div>
+      <div (click)="uploadFile()" class="btn-container" *ngIf="!uploadInProgress">
+        <i class="fas fa-upload" color="primary"></i>
+      </div>
+
+    </div>
+    <div class="progress-container" *ngIf="uploadInProgress">
+      <div class="font-container"><strong>0%</strong></div>
+
+      <div class="prog">
+
+        <!-- <mat-progress-bar value="40"></mat-progress-bar> -->
+        <div class="file-name"><strong>{{fileName}}</strong></div>
+        <div class="two-btns">
+          <button mat-fab color="primary" (click)="uploadVideo()">
+            <mat-icon>cloud_upload</mat-icon>
+          </button>
+          <button mat-fab color="primary" (click)="closeUpload()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+  <input type="file" #file (change)="fileUploaded($event)" hidden>
+</div>
+
+<div class="aft-vid-container" *ngIf="isVideoUploaded">
+  <mat-card class="video">
+    <video controls>
+      <source src="https://www.youtube.com/watch?v=EGmhBo1tkAk" type="video/youtube">
+      Your browser does not support HTML5 video.
+    </video>
+  </mat-card>
+  <mat-card class="stats">
+    <app-video-stats></app-video-stats>
+  </mat-card>
+
+</div>
